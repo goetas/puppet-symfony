@@ -9,14 +9,16 @@ class php-fpm::configure {
     exec { 'php-fpm-set-timezone':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'sed -i \'s/^[; ]*date.timezone =.*/date.timezone = Europe\/London/g\' /etc/php5/fpm/php.ini',
-        onlyif => 'test "`php -r \"echo ini_get(\'date.timezone\');\"`" = ""',
-        require => Class['php-fpm::install']
+        onlyif => 'test "`php -c /etc/php5/fpm/php.ini -r \"echo ini_get(\'date.timezone\');\"`" = ""',
+        require => Class['php-fpm::install'],
+        notify => Service['php5-fpm']
     }
     exec { 'php-fpm-disable-short-open-tag':
         path => '/usr/bin:/usr/sbin:/bin',
         command => 'sed -i \'s/^[; ]*short_open_tag =.*/short_open_tag = Off/g\' /etc/php5/fpm/php.ini',
-        onlyif => 'test "`php -r \"echo ini_get(\'short_open_tag\');\"`" = "1"',
-        require => Class['php-fpm::install']
+        onlyif => 'test "`php -c /etc/php5/fpm/php.ini -r \"echo ini_get(\'short_open_tag\');\"`" = "1"',
+        require => Class['php-fpm::install'],
+        notify => Service['php5-fpm']
     }
 }
 
