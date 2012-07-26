@@ -18,12 +18,15 @@ class php::install-cli {
 
 class php::configure-cli {
     exec { 'set-timezone':
-        command => '/bin/sed -i \'s/^[; ]*date.timezone =.*/date.timezone = Europe\/London/g\' /etc/php5/cli/php.ini',
-        # onlyif => 'test `php -r "echo ini_get(\'date.timezone\');"` = ""',
+        path => '/usr/bin:/usr/sbin:/bin',
+        command => 'sed -i \'s/^[; ]*date.timezone =.*/date.timezone = Europe\/London/g\' /etc/php5/cli/php.ini',
+        onlyif => 'test "`php -r \"echo ini_get(\'date.timezone\');\"`" = ""',
         require => Class['php::install-cli']
     }
     exec { 'disable-short-open-tag':
-        command => '/bin/sed -i \'s/^[;\s]*short_open_tag =.*/short_open_tag = Off/g\' /etc/php5/cli/php.ini',
+        path => '/usr/bin:/usr/sbin:/bin',
+        command => 'sed -i \'s/^[; ]*short_open_tag =.*/short_open_tag = Off/g\' /etc/php5/cli/php.ini',
+        onlyif => 'test "`php -r \"echo ini_get(\'short_open_tag\');\"`" = "1"',
         require => Class['php::install-cli']
     }
 }

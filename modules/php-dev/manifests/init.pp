@@ -5,8 +5,8 @@ class php::install-dev {
     }
     exec { 'pear-auto-discover':
         path => '/usr/bin:/usr/sbin:/bin',
-        # onlyif => 'test "`pear config-get auto_discover`" = "0"',
-        command => 'pear config-set auto_discover 1 system;',
+        onlyif => 'test "`pear config-get auto_discover`" = "0"',
+        command => 'pear config-set auto_discover 1 system',
         require => Class['php-cli']
     }
     exec { 'pear-update':
