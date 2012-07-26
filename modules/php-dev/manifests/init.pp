@@ -1,4 +1,4 @@
-class php::install-dev {
+class php-dev::install {
     package { 'php5-xdebug':
         ensure => installed,
         require => Class['php-cli']
@@ -32,5 +32,5 @@ class php::install-dev {
 }
 
 class php-dev {
-    include php::install-dev
+    include php-dev::install
 }
