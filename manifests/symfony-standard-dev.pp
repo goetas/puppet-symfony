@@ -8,3 +8,5 @@ class {
     'nginx':   stage => main;
     'dev':     stage => main;
 }
+
+nginx::vhost {'dev': }
