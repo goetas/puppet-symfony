@@ -6,6 +6,7 @@ class {
     'php-fpm': stage => main;
     'php-dev': stage => main;
     'nginx':   stage => main;
+    'mysql':   stage => main;
     'dev':     stage => main;
 }
 
