@@ -8,6 +8,9 @@ class php-cli::install {
     package { 'php5-intl':
         ensure => installed
     }
+    package { 'php5-curl':
+        ensure => installed
+    }
     package { 'php-apc':
         ensure => installed
     }
