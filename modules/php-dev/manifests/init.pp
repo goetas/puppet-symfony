@@ -3,6 +3,10 @@ class php-dev::install {
         ensure => installed,
         require => Class['php-cli']
     }
+    package { 'php5-gd':
+        ensure => installed,
+        require => Class['php-cli']
+    }
     exec { 'pear-auto-discover':
         path => '/usr/bin:/usr/sbin:/bin',
         onlyif => 'test "`pear config-get auto_discover`" = "0"',
