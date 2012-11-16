@@ -8,7 +8,7 @@ Vagrant::Config.run do |config|
 
   config.vm.customize ["modifyvm", :id, "--memory", 1024]
 
-  # config.vm.share_folder "symfony", "/home/vagrant/symfony", "~/projects/symfony", :nfs => true
+  # config.vm.share_folder "symfony", "/home/vagrant/symfony", ".", :nfs => true
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "manifests"
