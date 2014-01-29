@@ -1,6 +1,8 @@
 Puppet modules for Symfony development with Vagrant
 ===================================================
 
+**Note**: I pretty much abandoned this configuration in favour of another one based on chef: https://github.com/jakzal/vagrant-symfony
+
 Quick start
 -----------
 
