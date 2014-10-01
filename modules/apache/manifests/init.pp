@@ -34,15 +34,21 @@ define apache::vhost (
 
     $sitesavailable = '/etc/apache2/sites-available'
     $sitesenabled = '/etc/apache2/sites-enabled'
-            
+       
+    exec { "site_check_presence_site" :
+        path => '/usr/bin',
+        command => "test -e $docroot"
+    }
+    
     file {"$sitesavailable/$site.conf":
         content => template($template),
         owner   => 'root',
         group   => 'root',
-        mode    => '755',
-        require => Package['apache2'],
+        mode    => '655',
+        require => [Package['apache2'], Exec["site_check_presence_site"]],
         notify  => Service['apache2']
     }
+    
     file { "$sitesenabled/$site.conf":
         ensure => 'link',
         target => "$sitesavailable/$site",

@@ -24,9 +24,10 @@ class {
     
 }
 
+/*
 apache::vhost { 'sito':
     site => 'sito',
     server_name => 'dominio',
     docroot => '/vagrant/projects/folder/web'
 }
-
+*/
