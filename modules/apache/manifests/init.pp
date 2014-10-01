@@ -25,27 +25,28 @@ class apache::configure {
 
 define apache::vhost (
     $server_name,
-    $template = 'apache/virtualhost.erb',
-    $site = 'dev',
     $docroot,
+    $site,
     $ip = "*",
-    $port = "80"
+    $port = "80",
+    $template = 'apache/virtualhost.erb',
+    $server_alias = ""
 ) {
 
     $sitesavailable = '/etc/apache2/sites-available'
     $sitesenabled = '/etc/apache2/sites-enabled'
-       
+
     exec { "site_check_presence_site" :
-        path => '/usr/bin',
-        command => "test -e $docroot"
+       path => '/usr/bin',
+       command => "test -e $docroot || echo $docroot | grep -q '%'"
     }
-    
+   
     file {"$sitesavailable/$site.conf":
         content => template($template),
         owner   => 'root',
         group   => 'root',
         mode    => '655',
-        require => [Package['apache2'], Exec["site_check_presence_site"]],
+        require => Package['apache2'],
         notify  => Service['apache2']
     }
     

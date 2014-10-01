@@ -1,0 +1,11 @@
+<VirtualHost <%= @ip %>:<%= @port %>>
+    ServerName <%= @server_name %>
+    VirtualDocumentRoot <%= @docroot %>
+    ServerAlias <%= @server_alias %
+
+    <Location "<%= @docroot %>">
+        AllowOverride All
+        Require all granted
+    </Location>
+
+</VirtualHost>

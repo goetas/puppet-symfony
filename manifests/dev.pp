@@ -30,4 +30,9 @@ apache::vhost { 'sito':
     server_name => 'dominio',
     docroot => '/vagrant/projects/folder/web'
 }
+apache::vhost { 'sitodyn':
+    site => 'sitodyn',
+    server_name => 'dominio',
+    docroot => '/vagrant/projects/%/web'
+}
 */
