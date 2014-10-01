@@ -8,15 +8,19 @@ class php-cli::install {
     package { 'php5-intl':
         ensure => installed
     }
+    package { 'php5-json':
+        ensure => installed
+    }    
     package { 'php5-curl':
         ensure => installed
     }
-    package { 'php-apc':
+    package { 'php5-apcu':
         ensure => installed
     }
-    package { 'php-pear':
-        ensure => installed
-    }
+    package { 'php5-gd':
+        ensure => installed,
+        require => Class['php-cli']
+    }    
 }
 
 class php-cli::configure {

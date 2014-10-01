@@ -8,4 +8,10 @@ class dev {
     package { 'git':
         ensure => installed
     }
+    package { 'git-core':
+      ensure => installed
+    }
+    package { 'subversion':
+        ensure => installed
+    }
 }

@@ -3,11 +3,6 @@ class php-fpm::install {
         ensure => installed,
         require => Class['php-cli']
     }
-    package { 'php5-mysql':
-        ensure => installed,
-        require => Package['php5-fpm'],
-        notify => Service['php5-fpm']
-    }
 }
 
 class php-fpm::configure {
